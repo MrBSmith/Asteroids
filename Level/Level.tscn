@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ship/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Level/Level.gd" type="Script" id=2]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 521, 295 )
+
+[node name="SpawnAsteroidTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="spawn_projectile" from="Ship" to="." method="_on_Ship_spawn_projectile"]
+[connection signal="timeout" from="SpawnAsteroidTimer" to="." method="_on_SpawnAsteroidTimer_timeout"]
